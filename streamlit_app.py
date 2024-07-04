@@ -51,15 +51,32 @@ def generate_qr_code(url, box_size, border, image_size):
 # Streamlit app
 st.title("QR Code Generator")
 
-# Input fields
-url = st.text_input("Enter the URL:", "https://www.example.com")
-box_size = st.number_input("Box Size:", min_value=1, value=10)
-border = st.number_input("Border Size:", min_value=1, value=4)
-width = st.number_input("Image Width:", min_value=50, value=300)
-height = st.number_input("Image Height:", min_value=50, value=300)
+# Sidebar for input fields and GitHub link
+st.sidebar.title("Settings")
+url = st.sidebar.text_input("Enter the URL:", "https://www.example.com")
+box_size = st.sidebar.number_input("Box Size:", min_value=1, value=10)
+border = st.sidebar.number_input("Border Size:", min_value=1, value=4)
+width = st.sidebar.number_input("Image Width:", min_value=50, value=300)
+height = st.sidebar.number_input("Image Height:", min_value=50, value=300)
+
+st.sidebar.markdown("[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/your-repo-url)")
 
 # Generate and display QR code
-if st.button("Generate QR Code"):
+generate_button = st.sidebar.button("Generate QR Code")
+
+if generate_button:
     image_size = (width, height)
     qr_image = generate_qr_code(url, box_size, border, image_size)
     st.image(qr_image, caption="Generated QR Code")
+else:
+    st.write("### Instructions")
+    st.write("""
+    To generate a QR code, enter the URL and adjust the settings in the sidebar on the left.
+    - **URL**: The web address you want to encode.
+    - **Box Size**: Size of each box in the QR code.
+    - **Border Size**: Width of the border around the QR code.
+    - **Image Width**: Width of the output image.
+    - **Image Height**: Height of the output image.
+
+    After setting the parameters, click the "Generate QR Code" button.
+    """)
