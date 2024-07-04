@@ -44,7 +44,7 @@ def generate_qr_code(url, box_size, border, image_size):
     img = qr.make_image(fill='black', back_color='white').convert('RGB')
     
     # Resize the image
-    img = img.resize(image_size, Image.ANTIALIAS)
+    img = img.resize(image_size)
     
     return img
 
