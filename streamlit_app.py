@@ -1,6 +1,65 @@
 import streamlit as st
+import qrcode
+from PIL import Image
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+# Function to determine the appropriate version based on URL length
+def determine_version(url_length):
+    if url_length <= 25:
+        return 1
+    elif url_length <= 47:
+        return 2
+    elif url_length <= 77:
+        return 3
+    elif url_length <= 114:
+        return 4
+    elif url_length <= 154:
+        return 5
+    elif url_length <= 195:
+        return 6
+    elif url_length <= 224:
+        return 7
+    elif url_length <= 279:
+        return 8
+    else:
+        return 9
+
+# Function to create and display QR code inline
+def generate_qr_code(url, box_size, border, image_size):
+    # Determine the appropriate version based on URL length
+    version = determine_version(len(url))
+    
+    # Create a QR code object
+    qr = qrcode.QRCode(
+        version=version,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=box_size,
+        border=border,
+    )
+    
+    # Add the URL data to the QR code
+    qr.add_data(url)
+    qr.make(fit=True)
+
+    # Create an image from the QR Code instance
+    img = qr.make_image(fill='black', back_color='white').convert('RGB')
+    
+    # Resize the image
+    img = img.resize(image_size, Image.ANTIALIAS)
+    
+    return img
+
+# Streamlit app
+st.title("QR Code Generator")
+
+# Input fields
+url = st.text_input("Enter the URL:", "https://www.example.com")
+box_size = st.number_input("Box Size:", min_value=1, value=10)
+border = st.number_input("Border Size:", min_value=1, value=4)
+width = st.number_input("Image Width:", min_value=50, value=300)
+height = st.number_input("Image Height:", min_value=50, value=300)
+
+# Generate and display QR code
+if st.button("Generate QR Code"):
+    image_size = (width, height)
+    qr_image = generate_qr_code(url, box_size, border, image_size)
+    st.image(qr_image, caption="Generated QR Code")
