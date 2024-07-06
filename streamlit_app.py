@@ -59,8 +59,6 @@ border = st.sidebar.number_input("Border Size:", min_value=1, value=4)
 width = st.sidebar.number_input("Image Width:", min_value=50, value=300)
 height = st.sidebar.number_input("Image Height:", min_value=50, value=300)
 
-st.sidebar.markdown("[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue)](https://github.com/your-repo-url)")
-
 # Generate and display QR code
 generate_button = st.sidebar.button("Generate QR Code")
 
@@ -72,11 +70,12 @@ else:
     st.write("### Instructions")
     st.write("""
     To generate a QR code, enter the URL and adjust the settings in the sidebar on the left.
-    - **URL**: The web address you want to encode.
+    - **URL**: The web address or string you want to encode.
+    Optional additional parameters you may want to tweak:
     - **Box Size**: Size of each box in the QR code.
     - **Border Size**: Width of the border around the QR code.
-    - **Image Width**: Width of the output image.
-    - **Image Height**: Height of the output image.
+    - **Image Width**: Width of the output image (in pixels).
+    - **Image Height**: Height of the output image (in pixels).
 
     After setting the parameters, click the "Generate QR Code" button.
     """)
