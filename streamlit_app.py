@@ -71,6 +71,7 @@ else:
     st.write("""
     To generate a QR code, enter the URL and adjust the settings in the sidebar on the left.
     - **URL**: The web address or string you want to encode.
+    
     Optional additional parameters you may want to tweak:
     - **Box Size**: Size of each box in the QR code.
     - **Border Size**: Width of the border around the QR code.
