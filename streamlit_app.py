@@ -65,7 +65,7 @@ generate_button = st.sidebar.button("Generate QR Code")
 if generate_button:
     image_size = (width, height)
     qr_image = generate_qr_code(url, box_size, border, image_size)
-    st.image(qr_image, caption="Generated QR Code")
+    st.image(qr_image, caption=url)
 else:
     st.write("### Instructions")
     st.write("""
